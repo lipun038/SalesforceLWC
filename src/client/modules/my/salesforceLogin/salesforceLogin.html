@@ -1,0 +1,71 @@
+<template>
+    <div class="pure-form  pure-form-aligned">
+        <fieldset>
+            <P style="background-color:#EEEEEE;padding:10px;font-weight:bold;">
+                {loginMsg} </P
+            ><br />
+            <template if:true={loginVisible}>
+                <div class="pure-control-group">
+                    <label for="orgType">Org Type</label>
+                    <select id="orgType" onchange={handleOrgType}>
+                        <option value="Dev">Dev/Prod</option>
+                        <option value="Sandbox">Sandbox</option>
+                    </select>
+                </div>
+                <div class="pure-control-group">
+                    <label for="userName">Username</label>
+                    <input
+                        id="userName"
+                        name="userName"
+                        type="email"
+                        value={userName}
+                        placeholder="abcd@gmail.com(Required)"
+                        onchange={handleUserNameChange}
+                    />
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="password">Password</label>
+                    <input
+                        id="password"
+                        type="password"
+                        value={password}
+                        placeholder="Password(Required)"
+                        onchange={handlePasswordChange}
+                    />
+                </div>
+                <div class="pure-control-group">
+                    <label for="securityToken">Security Token</label>
+                    <input
+                        id="securityToken"
+                        type="text"
+                        value={securityToken}
+                        placeholder="Security Token(Optional)"
+                        onchange={handleSecurityTokenChange}
+                    />
+                </div>
+                <div class="pure-controls">
+                    <label for="cb" class="pure-checkbox"> </label>
+                    <button
+                        type="button"
+                        onclick={doLogin}
+                        class="pure-button pure-button-primary"
+                    >
+                        Login
+                    </button>
+                </div>
+            </template>
+        </fieldset>
+    </div>
+    <template if:true={actionVisible}>
+        <div class="pure-form">
+            <div class="pure-control-group">
+                <select id="sfAction" style="width:100%;">
+                    <option>Execute Query</option>
+                    <option>Platform Event</option>
+                </select>
+            </div>
+        </div>
+    </template>
+    <br />
+</template>
