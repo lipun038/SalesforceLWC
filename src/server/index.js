@@ -24,7 +24,13 @@ module.exports = app => {
                 if (err) {
                     res.send(err.message);
                 } else {
-                    res.send('Login Success : ' + req.body.userName+'('+userInfo.id+')');
+                    res.send(
+                        'Login Success : ' +
+                            req.body.userName +
+                            '(' +
+                            userInfo.id +
+                            ')'
+                    );
                 }
             }
         );
