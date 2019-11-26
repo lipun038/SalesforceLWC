@@ -3,10 +3,14 @@ export default class SalesforceLogin extends LightningElement {
     @track loginVisible = true;
     @track actionVisible = false;
     @track loginMsg = 'Please provide your Salesforce org credential';
+    @track sfAction = 'soqlQuery';
+    @track isSoqlQuery = true;
+    @track isSoslQuery = false;
     orgType = 'Dev';
     userName = '';
     password = '';
     securityToken = '';
+   
 
     doLogin() {
         var validationLoginFlag = this.validateLogin();
@@ -42,6 +46,29 @@ export default class SalesforceLogin extends LightningElement {
                 });
         }
     }
+    soqlQuery() { 
+        const URL = '/salesforce/api/soqlQuery';
+        const body = {
+            q: 'SELECT Id,Name FROM ACCOUNT LIMIT 1',
+        };
+        fetch(URL, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(function(response) {
+            // The response is a Response instance.
+            // You parse the data into a useable format using `.json()`
+            return response.json();
+        })
+        .then(data => {
+            if (!data.errorMsg) {
+                this.loginMsg = 'Number of records : ' + data.recordsCount;
+            } else { 
+                this.loginMsg = data.errorMsg;    
+            }
+        });
+    }
 
     validateLogin() {
         var noValidation = true;
@@ -61,5 +88,23 @@ export default class SalesforceLogin extends LightningElement {
     }
     handleOrgType(event) {
         this.orgType = event.target.value;
+    }
+    handleSfAction(event) { 
+        this.sfAction = event.target.value;
+        this.actionVisibility(this.sfAction);
+    }
+    actionVisibility(sfAction) { 
+        if (sfAction === 'soqlQuery') {
+            this.hideActions();
+            this.isSoqlQuery = true;
+        } else if (sfAction === 'soslQuery') { 
+            this.hideActions();
+            this.isSoslQuery = true;    
+        }
+    }
+    hideActions() { 
+        //make every action to false
+        this.isSoqlQuery = false;
+        this.isSoslQuery = false;
     }
 }

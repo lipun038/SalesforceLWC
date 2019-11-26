@@ -35,4 +35,24 @@ module.exports = app => {
             }
         );
     });
+    app.post('/salesforce/api/soqlQuery', (req, res) => {
+        var records;
+        var recordsCount = 0;
+        var errorMsg = '';
+        var bodyJson = {};
+        conn.query(req.body.q, function(err, result) {
+            if (err) {
+                errorMsg = err.message;
+            } else {
+                recordsCount = result.totalSize;
+                records=result.records;
+            }
+            bodyJson = {
+                records: records,
+                recordsCount: recordsCount,
+                errorMsg : errorMsg
+            }
+            res.json(bodyJson);
+        }); 
+    });    
 };

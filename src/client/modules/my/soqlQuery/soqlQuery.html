@@ -1,0 +1,23 @@
+<template>
+    <div class="container">
+        <template if:true={queryMsg}>
+            <P style="background-color:#4CAF51;padding:10px;font-weight:bold;">
+                {queryMsg} 
+            </P>
+            <br />
+        </template>
+        <textarea class="slds-input" rows="3" placeholder="SELECT Id,Name FROM Account WHERE Name='Salesforce' LIMIT 5" onchange={handleQuery}></textarea>
+        <div class="center">
+            <button
+                type="button"
+                onclick={doExecuteQuery}
+                class="slds-button slds-button_brand"
+            >
+                Execute Query
+            </button>
+        </div><br>
+        <template if:true={records}>
+            <my-data-table records={records}></my-data-table>
+        </template>
+    </div> 
+</template>

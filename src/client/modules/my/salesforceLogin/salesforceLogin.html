@@ -60,12 +60,18 @@
     <template if:true={actionVisible}>
         <div class="pure-form">
             <div class="pure-control-group">
-                <select id="sfAction" style="width:100%;">
-                    <option>Execute Query</option>
-                    <option>Platform Event</option>
+                <select id="sfAction" style="width:100%;" onchange={handleSfAction} value={sfAction}>
+                    <option value="soqlQuery">SOQL Query</option>
+                    <option value="soslQuery">SOSL Query</option>
                 </select>
             </div>
         </div>
+        <template if:true={isSoqlQuery}>
+            <my-soql-query></my-soql-query>
+        </template>
+        <template if:true={isSoslQuery}>
+            <my-sosl-query></my-sosl-query>
+        </template>
     </template>
     <br />
 </template>
