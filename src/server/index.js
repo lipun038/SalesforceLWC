@@ -45,14 +45,14 @@ module.exports = app => {
                 errorMsg = err.message;
             } else {
                 recordsCount = result.totalSize;
-                records=result.records;
+                records = result.records;
             }
             bodyJson = {
                 records: records,
                 recordsCount: recordsCount,
-                errorMsg : errorMsg
-            }
+                errorMsg: errorMsg
+            };
             res.json(bodyJson);
-        }); 
-    });    
+        });
+    });
 };

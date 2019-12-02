@@ -60,7 +60,12 @@
     <template if:true={actionVisible}>
         <div class="pure-form">
             <div class="pure-control-group">
-                <select id="sfAction" style="width:100%;" onchange={handleSfAction} value={sfAction}>
+                <select
+                    id="sfAction"
+                    style="width:100%;"
+                    onchange={handleSfAction}
+                    value={sfAction}
+                >
                     <option value="soqlQuery">SOQL Query</option>
                     <option value="soslQuery">SOSL Query</option>
                 </select>
