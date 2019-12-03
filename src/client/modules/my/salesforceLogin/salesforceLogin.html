@@ -6,8 +6,8 @@
         {loginMsg}
     </P>
     <template if:true={loginVisible}>
-        <div class="row">
-            <div class="col-6">
+        <div class="container">
+            <div>
                 <div class="leftBox">
                     <div class="loginForm">
                         <label for="orgType">Org Type</label>
@@ -46,11 +46,14 @@
 
                         <button type="button" onclick={doLogin}>Login</button>
 
-                        <p style="color:red;text-align:center">*** We don't store any of your credential or data. ***</p> 
+                        <p style="color:red;text-align:center">
+                            *** We don't store any of your credential or data.
+                            ***
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div>
                 <div class="rightBox">
                     <ul>
                         <li>User Login</li>
