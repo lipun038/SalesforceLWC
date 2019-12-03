@@ -45,7 +45,7 @@ button[type='button']:hover {
 ul {
     list-style-type: none;
 }
-li{
+li {
     font-weight: bold;
 }
 li:before {
