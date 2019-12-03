@@ -1,62 +1,74 @@
 <template>
-    <div class="pure-form  pure-form-aligned">
-        <fieldset>
-            <P style="background-color:#EEEEEE;padding:10px;font-weight:bold;">
-                {loginMsg} </P
-            ><br />
-            <template if:true={loginVisible}>
-                <div class="pure-control-group">
-                    <label for="orgType">Org Type</label>
-                    <select id="orgType" onchange={handleOrgType}>
-                        <option value="Dev">Dev/Prod</option>
-                        <option value="Sandbox">Sandbox</option>
-                    </select>
-                </div>
-                <div class="pure-control-group">
-                    <label for="userName">Username</label>
-                    <input
-                        id="userName"
-                        name="userName"
-                        type="email"
-                        value={userName}
-                        placeholder="abcd@gmail.com(Required)"
-                        onchange={handleUserNameChange}
-                    />
-                </div>
+    <P class="center" style="background-color:#EEEEEE;padding:10px;font-weight:bold;">
+        {loginMsg} </P
+    >        
+    <template if:true={loginVisible}>
+        <div class="row">
+            <div class="col-6">    
+                <div class="leftBox">
+                    <div class="loginForm">
+            
+                        <label for="orgType">Org Type</label>
+                        <select id="orgType" onchange={handleOrgType}>
+                            <option value="Dev">Dev/Prod</option>
+                            <option value="Sandbox">Sandbox</option>
+                        </select>
+                        
+                        <label for="userName">Username</label>
+                        <input
+                            id="userName"
+                            name="userName"
+                            type="email"
+                            value={userName}
+                            placeholder="abcd@gmail.com(Required)"
+                            onchange={handleUserNameChange}
+                        />
+                        
 
-                <div class="pure-control-group">
-                    <label for="password">Password</label>
-                    <input
-                        id="password"
-                        type="password"
-                        value={password}
-                        placeholder="Password(Required)"
-                        onchange={handlePasswordChange}
-                    />
+                        
+                        <label for="password">Password</label>
+                        <input
+                            id="password"
+                            type="password"
+                            value={password}
+                            placeholder="Password(Required)"
+                            onchange={handlePasswordChange}
+                        />
+                        
+
+                        <label for="securityToken">Security Token</label>
+                        <input
+                            id="securityToken"
+                            type="text"
+                            value={securityToken}
+                            placeholder="Security Token(Optional)"
+                            onchange={handleSecurityTokenChange}
+                        />
+
+                        <button type="button" onclick={doLogin}>Login</button>
+                    </div>
                 </div>
-                <div class="pure-control-group">
-                    <label for="securityToken">Security Token</label>
-                    <input
-                        id="securityToken"
-                        type="text"
-                        value={securityToken}
-                        placeholder="Security Token(Optional)"
-                        onchange={handleSecurityTokenChange}
-                    />
+            </div>
+            <div class="col-3">
+                <div class="rightBox">
+                   <ul>
+                        <li>User Login</li>
+                        <li>SOQL Query</li>
+                        <li>SOSL Query</li>
+                        <li>REST API</li>
+                        <li>Streaming API</li>
+                        <li>Platform Event</li>
+                        <li>Push Topic</li>
+                        <li>Create Records</li>
+                        <li>Update Records</li>
+                        <li>Delete Records</li>
+                   </ul>    
                 </div>
-                <div class="pure-controls">
-                    <label for="cb" class="pure-checkbox"> </label>
-                    <button
-                        type="button"
-                        onclick={doLogin}
-                        class="pure-button pure-button-primary"
-                    >
-                        Login
-                    </button>
-                </div>
-            </template>
-        </fieldset>
-    </div>
+            </div>
+        </div>      
+    </template>
+            
+        
     <template if:true={actionVisible}>
         <div class="pure-form">
             <div class="pure-control-group">

@@ -29,13 +29,13 @@ export default class DataTable extends LightningElement {
                     let dt = records[i][col[j]];
                     if (!dt) {
                         dt = ''; //Null or Undefind to blank
-                    } else { 
+                    } else {
                         if (dt === Object(dt)) {
-                            if (dt.records) { 
-                                 dt = this.buildTable(dt.records);    
-                            }else {
+                            if (dt.records) {
+                                dt = this.buildTable(dt.records);
+                            } else {
                                 dt = this.buildObjectStr(dt);
-                            }    
+                            }
                         }
                     }
                     htmlTableStr += '<td>' + dt + '</td>'; // Table data
@@ -54,10 +54,10 @@ export default class DataTable extends LightningElement {
                 htmlTableStr += '<th>' + key + '</th>';
                 let dataVal = obj[key] ? obj[key] : '';
                 htmlTableStr += '<td>' + dataVal + '</td>';
-                htmlTableStr += '</tr>'; 
+                htmlTableStr += '</tr>';
             }
         }
         htmlTableStr += '</table>';
         return htmlTableStr;
-    }    
+    }
 }
