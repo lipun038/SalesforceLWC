@@ -1,19 +1,21 @@
 <template>
-    <P class="center" style="background-color:#EEEEEE;padding:10px;font-weight:bold;">
-        {loginMsg} </P
-    >        
+    <P
+        class="center"
+        style="background-color:#EEEEEE;padding:10px;font-weight:bold;"
+    >
+        {loginMsg}
+    </P>
     <template if:true={loginVisible}>
         <div class="row">
-            <div class="col-6">    
+            <div class="col-6">
                 <div class="leftBox">
                     <div class="loginForm">
-            
                         <label for="orgType">Org Type</label>
                         <select id="orgType" onchange={handleOrgType}>
                             <option value="Dev">Dev/Prod</option>
                             <option value="Sandbox">Sandbox</option>
                         </select>
-                        
+
                         <label for="userName">Username</label>
                         <input
                             id="userName"
@@ -23,9 +25,7 @@
                             placeholder="abcd@gmail.com(Required)"
                             onchange={handleUserNameChange}
                         />
-                        
 
-                        
                         <label for="password">Password</label>
                         <input
                             id="password"
@@ -34,7 +34,6 @@
                             placeholder="Password(Required)"
                             onchange={handlePasswordChange}
                         />
-                        
 
                         <label for="securityToken">Security Token</label>
                         <input
@@ -49,9 +48,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-6">
                 <div class="rightBox">
-                   <ul>
+                    <ul>
                         <li>User Login</li>
                         <li>SOQL Query</li>
                         <li>SOSL Query</li>
@@ -59,16 +58,15 @@
                         <li>Streaming API</li>
                         <li>Platform Event</li>
                         <li>Push Topic</li>
-                        <li>Create Records</li>
-                        <li>Update Records</li>
-                        <li>Delete Records</li>
-                   </ul>    
+                        <li>sObject DML</li>
+                        <li>Salesforce Blogs : <a target="_blank" href="https://salesforceblog.tumblr.com">https://salesforceblog.tumblr.com</a></li>
+                        <li>REST Client : <a target="_blank" href="http://sfdctools.herokuapp.com/restclient.jsp">http://sfdctools.herokuapp.com/restclient.jsp</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>      
+        </div>
     </template>
-            
-        
+
     <template if:true={actionVisible}>
         <div class="pure-form">
             <div class="pure-control-group">
