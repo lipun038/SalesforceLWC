@@ -1,18 +1,33 @@
 <template>
     <div class="container">
+        <template if:true={queryMsg}>
+            <P style="background-color:#4CAF51;padding:10px;font-weight:bold;">
+                {queryMsg}
+            </P>
+            <br />
+        </template>
         <textarea
             class="slds-input"
             rows="3"
-            placeholder="FIND 'Google OR Salesforce' IN ALL FIELDS RETURNING Account(Name),Contact(FirstName,LastName,Department)"
+            placeholder="FIND {Un*} IN ALL FIELDS RETURNING Account(Id, Name), Lead(Id, Name, Company)"
+            onchange={handleQuery}
         ></textarea>
         <div class="center">
             <button
                 type="button"
-                onclick={doLogin}
+                onclick={doExecuteQuery}
                 class="slds-button slds-button_brand"
             >
                 Execute Query
             </button>
         </div>
+        <br />
+        <template if:true={records}>
+            <template for:each={records} for:item="record" for:index="index">
+                <P style="background-color:#95a5a6;padding:10px;font-weight:bold;font-size:15px;" key={record.type}>{record.type} ({record.size})</p>
+                <my-data-table key={record.size} records={record.list}></my-data-table>
+            </template>  
+            
+        </template>
     </div>
 </template>

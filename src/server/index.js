@@ -55,4 +55,24 @@ module.exports = app => {
             res.json(bodyJson);
         });
     });
+    app.post('/salesforce/api/soslQuery', (req, res) => {
+        var records;
+        var recordsCount = 0;
+        var errorMsg = '';
+        var bodyJson = {};
+        conn.search(req.body.q, function(err, result) {
+            if (err) {
+                errorMsg = err.message;
+            } else {
+                recordsCount = result.searchRecords.length;
+                records = result.searchRecords;
+            }
+            bodyJson = {
+                records: records,
+                recordsCount: recordsCount,
+                errorMsg: errorMsg
+            };
+            res.json(bodyJson);
+        });
+    });
 };

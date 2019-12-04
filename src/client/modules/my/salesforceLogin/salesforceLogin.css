@@ -55,9 +55,8 @@ li:before {
     font-weight: bold;
 }
 /*For Grid Layout*/
-.container{
-    display : grid;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 /*End of For Grid Layout*/
-
