@@ -7,7 +7,7 @@
 .dataTable td,
 .dataTable th {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 5px;
 }
 
 .dataTable tr:nth-child(even) {
@@ -19,9 +19,9 @@
 }
 
 .dataTable th {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     text-align: left;
-    background-color: #4caf51;
+    background-color: #16a085;
     color: white;
 }

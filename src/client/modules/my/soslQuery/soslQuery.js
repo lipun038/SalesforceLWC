@@ -33,22 +33,25 @@ export default class SoslQuery extends LightningElement {
                             'Number of records : ' + data.recordsCount;
                         this.records = data.records;
                         let tempMap = new Map();
-                        //Collect records for each sObject Types 
+                        //Collect records for each sObject Types
                         this.records.forEach(record => {
                             //record["Object Type"] = record.attributes.type;
                             let tempArr = tempMap.get(record.attributes.type);
-                            if (!tempArr) { 
-                                tempArr = [];    
+                            if (!tempArr) {
+                                tempArr = [];
                             }
                             tempArr.push(record);
                             tempMap.set(record.attributes.type, tempArr);
                         });
                         let transformObj = [];
                         tempMap.forEach((value, key) => {
-                            transformObj.push({type : key, list : value , size : (value.length)})
+                            transformObj.push({
+                                type: key,
+                                list: value,
+                                size: value.length
+                            });
                         });
                         this.records = transformObj;
-                        
                     } else {
                         this.queryMsg = data.errorMsg;
                     }

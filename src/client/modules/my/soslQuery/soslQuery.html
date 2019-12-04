@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <template if:true={queryMsg}>
-            <P style="background-color:#4CAF51;padding:10px;font-weight:bold;">
+            <P style="background-color:#16a085;padding:10px;font-weight:bold;">
                 {queryMsg}
             </P>
             <br />
@@ -24,10 +24,16 @@
         <br />
         <template if:true={records}>
             <template for:each={records} for:item="record" for:index="index">
-                <P style="background-color:#95a5a6;padding:10px;font-weight:bold;font-size:15px;" key={record.type}>{record.type} ({record.size})</p>
-                <my-data-table key={record.size} records={record.list}></my-data-table>
-            </template>  
-            
+                <P
+                    style="background-color:#95a5a6;padding:10px;font-weight:bold;font-size:15px;"
+                    key={record.type}
+                    >{record.type} ({record.size})</P
+                >
+                <my-data-table
+                    key={record.size}
+                    records={record.list}
+                ></my-data-table>
+            </template>
         </template>
     </div>
 </template>
