@@ -4,6 +4,8 @@ export default class SoslQuery extends LightningElement {
     @track queryMsg = '';
     @track records;
     soslQuery = '';
+    startBracket = '{';
+    endBracket = '}';
     handleQuery(event) {
         this.soslQuery = event.target.value;
     }
