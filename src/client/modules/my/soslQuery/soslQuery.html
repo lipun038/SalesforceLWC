@@ -9,19 +9,28 @@
         <div>
             <ul>
                 <li>
-                    <b>Exmple of ALL FIELDS :</b> FIND {startBracket}Un*{endBracket} IN ALL FIELDS RETURNING Account(Id, Name), Lead(Id, Name, Company)
+                    <b>Exmple of ALL FIELDS :</b> FIND
+                    {startBracket}Un*{endBracket} IN ALL FIELDS RETURNING
+                    Account(Id, Name), Lead(Id, Name, Company)
                 </li>
                 <li>
-                    <b>Exmple of Name FIELDS :</b> FIND {startBracket}Un*{endBracket} IN Name FIELDS RETURNING Account(Id, Name), Lead(Id, Name, Company)
+                    <b>Exmple of Name FIELDS :</b> FIND
+                    {startBracket}Un*{endBracket} IN Name FIELDS RETURNING
+                    Account(Id, Name), Lead(Id, Name, Company)
                 </li>
                 <li>
-                    <b>Exmple of Email FIELDS :</b> FIND {startBracket}*gmail.com*{endBracket} IN Email FIELDS RETURNING Contact(Id, Name, Email), Lead(Id, Name, Email, Company)
+                    <b>Exmple of Email FIELDS :</b> FIND
+                    {startBracket}*gmail.com{endBracket} IN Email FIELDS
+                    RETURNING Contact(Id, Name, Email), Lead(Id, Name, Email,
+                    Company)
                 </li>
-                 <li>
-                    <b>Exmple of Phone FIELDS :</b> FIND {startBracket}*1111*{endBracket} IN Phone FIELDS RETURNING Contact(Id, Name, Phone), Lead(Id, Name, Phone, Company)
+                <li>
+                    <b>Exmple of Phone FIELDS :</b> FIND
+                    {startBracket}*1111*{endBracket} IN Phone FIELDS RETURNING
+                    Contact(Id, Name, Phone), Lead(Id, Name, Phone, Company)
                 </li>
             </ul>
-        </div> 
+        </div>
         <textarea
             class="slds-input"
             rows="3"

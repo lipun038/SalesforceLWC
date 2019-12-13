@@ -9,16 +9,20 @@
         <div>
             <ul>
                 <li>
-                    <b>Exmple of single object :</b> SELECT Id,Name FROM Contact WHERE firstName='Prasanta' LIMIT 5
+                    <b>Exmple of single object :</b> SELECT Id,Name FROM Contact
+                    WHERE firstName='Prasanta' LIMIT 5
                 </li>
                 <li>
-                    <b>Exmple of parent object :</b> SELECT Id,Name,Account.Name,Account.Id,Account.Industry FROM Contact LIMIT 5
+                    <b>Exmple of parent object :</b> SELECT
+                    Id,Name,Account.Name,Account.Id,Account.Industry FROM
+                    Contact LIMIT 5
                 </li>
                 <li>
-                    <b>Exmple of child objects :</b> SELECT Id,Name,(SELECT Name,Email FROM Contacts) FROM Account LIMIT 5
+                    <b>Exmple of child objects :</b> SELECT Id,Name,(SELECT
+                    Name,Email FROM Contacts) FROM Account LIMIT 5
                 </li>
             </ul>
-        </div>    
+        </div>
         <textarea
             class="slds-input"
             rows="3"
