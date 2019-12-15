@@ -6,6 +6,7 @@ export default class SalesforceLogin extends LightningElement {
     @track sfAction = 'soqlQuery';
     @track isSoqlQuery = true;
     @track isSoslQuery = false;
+    @track isRestExplorer = false;
     orgType = 'Dev';
     userName = '';
     password = '';
@@ -99,11 +100,15 @@ export default class SalesforceLogin extends LightningElement {
         } else if (sfAction === 'soslQuery') {
             this.hideActions();
             this.isSoslQuery = true;
+        } else if (sfAction === 'restExplorer') {
+            this.hideActions();
+            this.restExplorer = true;
         }
     }
     hideActions() {
         //make every action to false
         this.isSoqlQuery = false;
         this.isSoslQuery = false;
+        this.isRestExplorer = false;
     }
 }

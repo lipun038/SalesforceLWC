@@ -20,16 +20,16 @@ module.exports = app => {
         conn.login(
             req.body.userName,
             req.body.password + req.body.securityToken,
-            function(err, userInfo) {
+            function(err) {
                 if (err) {
                     res.send(err.message);
                 } else {
                     res.send(
                         'Login Success : ' +
                             req.body.userName +
-                            '(' +
-                            userInfo.id +
-                            ')'
+                            '( v' +
+                            conn.version +
+                            ' )'
                     );
                 }
             }
@@ -70,6 +70,23 @@ module.exports = app => {
             bodyJson = {
                 records: records,
                 recordsCount: recordsCount,
+                errorMsg: errorMsg
+            };
+            res.json(bodyJson);
+        });
+    });
+    app.post('/salesforce/api/restExplorerGet', (req, res) => {
+        var errorMsg = '';
+        var bodyJson = {};
+        var jsonResponse = '';
+        conn.requestGet(req.body.url, function(err, result) {
+            if (err) {
+                errorMsg = err.message;
+            } else {
+                jsonResponse = result;
+            }
+            bodyJson = {
+                jsonResponse: jsonResponse,
                 errorMsg: errorMsg
             };
             res.json(bodyJson);

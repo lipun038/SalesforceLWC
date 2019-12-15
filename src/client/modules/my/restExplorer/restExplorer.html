@@ -1,0 +1,69 @@
+<template>
+    <div class="container">
+        <template if:true={queryMsg}>
+            <P style="background-color:#16a085;padding:10px;font-weight:bold;">
+                {queryMsg}
+            </P>
+            <br />
+        </template>
+        <div>
+            <ul>
+                <li><b>Exmple of Standard API :</b> /services/data/v46.0</li>
+                <li><b>Exmple of sObject :</b> /sobjects/Account/describe</li>
+                <li>
+                    <b>Exmple of REST Query :</b>
+                    /services/data/v46.0/query?q=<b
+                        >SELECT Name FROM Account LIMIT 5</b
+                    >
+                </li>
+
+                <li>
+                    <b>Exmple of Custom REST API :</b> /services/apexrest<b
+                        >/RestDemo/0011500001emgqw</b
+                    >
+                </li>
+            </ul>
+        </div>
+        <br />
+        <select id="requestType" onchange={handleRequestType}>
+            <option value="GET">GET</option>
+            <!--
+            <option value="POST">POST</option>
+            -->
+        </select>
+
+        <input
+            id="requestUrl"
+            name="requestUrl"
+            type="text"
+            value={requestUrl}
+            placeholder="/services/data/v46.0"
+            onchange={handleRequestUrl}
+        />
+        <!--
+        <textarea
+            class="slds-input"
+            rows="3"
+            placeholder="FIND {Un*} IN ALL FIELDS RETURNING Account(Id, Name), Lead(Id, Name, Company)"
+            onchange={handleQuery}
+        ></textarea>
+        -->
+        <div class="center">
+            <button
+                type="button"
+                onclick={doExecuteRequest}
+                class="slds-button slds-button_brand"
+            >
+                Execute
+            </button>
+        </div>
+        <br />
+        <template if:true={jsonResponse}>
+            <pre
+                style="background-color:#EEEEEE;padding:10px;font-weight:bold;"
+            >
+                {jsonResponse}
+            </pre>
+        </template>
+    </div>
+</template>

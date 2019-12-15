@@ -97,6 +97,7 @@
                 >
                     <option value="soqlQuery">SOQL Query</option>
                     <option value="soslQuery">SOSL Query</option>
+                    <option value="restExplorer">REST Explorer</option>
                 </select>
             </div>
         </div>
@@ -105,6 +106,9 @@
         </template>
         <template if:true={isSoslQuery}>
             <my-sosl-query></my-sosl-query>
+        </template>
+        <template if:true={restExplorer}>
+            <my-rest-explorer></my-rest-explorer>
         </template>
     </template>
     <br />
