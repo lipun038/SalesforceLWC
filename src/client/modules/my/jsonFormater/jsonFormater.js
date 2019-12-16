@@ -6,7 +6,8 @@ export default class JsonFormater extends LightningElement {
     jsonRequest = '';
     startBracket = '{';
     endBracket = '}';
-    jsonPlaceHolder = '{"Name" : "Prasanta Kumar","Email" : "prasanta@gmail.com", "Height" : 180, "Weight" : 78}';
+    jsonPlaceHolder =
+        '{"Name" : "Prasanta Kumar","Email" : "prasanta@gmail.com", "Height" : 180, "Weight" : 78}';
     handleJson(event) {
         this.jsonRequest = event.target.value;
     }
@@ -20,7 +21,7 @@ export default class JsonFormater extends LightningElement {
                 jsonObj = JSON.parse(this.jsonRequest);
                 this.jsonResponse = JSON.stringify(jsonObj, null, 4);
                 this.queryMsg = '';
-            } catch (err) { 
+            } catch (err) {
                 this.queryMsg = err.message;
                 this.jsonResponse = '';
             }

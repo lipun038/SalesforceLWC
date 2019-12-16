@@ -8,19 +8,22 @@
         </template>
         <div>
             <ul>
-                <li><b>Exmple of JSON String :</b> {startBracket}"Name" : "Prasanta Kumar","Email" : "prasanta@gmail.com", "Height" : 180, "Weight" : 78{endBracket}</li>
+                <li>
+                    <b>Exmple of JSON String :</b> {startBracket}"Name" :
+                    "Prasanta Kumar","Email" : "prasanta@gmail.com", "Height" :
+                    180, "Weight" : 78{endBracket}
+                </li>
             </ul>
         </div>
         <br />
-        
-        
+
         <textarea
             class="slds-input"
             rows="6"
             placeholder={jsonPlaceHolder}
             onchange={handleJson}
         ></textarea>
-        
+
         <div class="center">
             <button
                 type="button"
