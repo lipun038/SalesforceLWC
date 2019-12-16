@@ -1,0 +1,42 @@
+<template>
+    <div class="container">
+        <template if:true={queryMsg}>
+            <P style="background-color:#16a085;padding:10px;font-weight:bold;">
+                {queryMsg}
+            </P>
+            <br />
+        </template>
+        <div>
+            <ul>
+                <li><b>Exmple of JSON String :</b> {startBracket}"Name" : "Prasanta Kumar","Email" : "prasanta@gmail.com", "Height" : 180, "Weight" : 78{endBracket}</li>
+            </ul>
+        </div>
+        <br />
+        
+        
+        <textarea
+            class="slds-input"
+            rows="6"
+            placeholder={jsonPlaceHolder}
+            onchange={handleJson}
+        ></textarea>
+        
+        <div class="center">
+            <button
+                type="button"
+                onclick={doFormatJson}
+                class="slds-button slds-button_brand"
+            >
+                Format
+            </button>
+        </div>
+        <br />
+        <template if:true={jsonResponse}>
+            <pre
+                style="background-color:#EEEEEE;padding:10px;font-weight:bold;"
+            >
+                {jsonResponse}
+            </pre>
+        </template>
+    </div>
+</template>

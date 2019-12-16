@@ -7,9 +7,6 @@ export default class RestExplorer extends LightningElement {
     requestUrl = '/services/data/v46.0';
     startBracket = '{';
     endBracket = '}';
-    handleQuery(event) {
-        this.soslQuery = event.target.value;
-    }
     handleRequestType(event) {
         this.requestType = event.target.value;
     }

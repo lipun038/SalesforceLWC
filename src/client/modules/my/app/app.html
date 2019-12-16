@@ -1,5 +1,20 @@
 <template>
+    <div class="tab">
+        <button class="tablinks active" onclick={openTab} id="salesforceTab" value="Salesforce">Salesforce</button>
+        <button class="tablinks" onclick={openTab} id="jsonFormaterTab" value="JsonFormater">JSON Formater</button>
+    </div>
+
+    <div id="Salesforce" style="display:block;" data-id="Salesforce" class="tabcontent">
+        <my-salesforce-login></my-salesforce-login>    
+    </div>
+    <div id="JsonFormater" data-id="JsonFormater" class="tabcontent">
+        <my-json-formater></my-json-formater>   
+    </div>
+
+    <!--
     <div>
         <my-salesforce-login></my-salesforce-login>
     </div>
+    -->
+    
 </template>
