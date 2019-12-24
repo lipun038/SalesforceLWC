@@ -8,16 +8,32 @@
         </template>
         <div>
             <ul>
-                <li><b>Exmple of Push Topic :</b> /topic/<b>CreateUpdateContact</b></li>
-                <li><b>Exmple of Platform Event :</b> /event/<b>Test_Event__e</b></li>
-                <li><b>Exmple of Standard Object CDC :</b> /data/<b>AccountChangeEvent</b></li>
-                <li><b>Exmple of Custom Object CDC :</b> /event/<b>Employee__ChangeEvent</b></li>
+                <li>
+                    <b>Exmple of Push Topic :</b> /topic/<b
+                        >CreateUpdateContact</b
+                    >
+                </li>
+                <li>
+                    <b>Exmple of Platform Event :</b> /event/<b
+                        >Test_Event__e</b
+                    >
+                </li>
+                <li>
+                    <b>Exmple of Standard Object CDC :</b> /data/<b
+                        >AccountChangeEvent</b
+                    >
+                </li>
+                <li>
+                    <b>Exmple of Custom Object CDC :</b> /data/<b
+                        >Employee__ChangeEvent</b
+                    >
+                </li>
             </ul>
         </div>
-        <br/>
+        <br />
         <p style="color:red;text-align:center">
-            *** We don't validate push topic / platform event name. Make sure it exist in your org.
-            ***
+            *** We don't validate push topic / platform event name. Make sure it
+            exist in your org. ***
         </p>
         <input
             id="requestUrl"
@@ -46,7 +62,10 @@
                 </button>
             </template>
             <template if:false={isSubscribeButton}>
-                <h2>Subscribed to <i>{requestUrl}</i> and listening for notification</h2>
+                <h2>
+                    Subscribed to <i>{requestUrl}</i> and listening for
+                    notification
+                </h2>
             </template>
         </div>
         <br />

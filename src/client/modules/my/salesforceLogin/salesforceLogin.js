@@ -104,7 +104,7 @@ export default class SalesforceLogin extends LightningElement {
         } else if (sfAction === 'restExplorer') {
             this.hideActions();
             this.isRestExplorer = true;
-        }else if (sfAction === 'streaming') {
+        } else if (sfAction === 'streaming') {
             this.hideActions();
             this.isStreaming = true;
         }

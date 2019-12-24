@@ -7,7 +7,7 @@ export default class Streaming extends LightningElement {
     @track requestUrl = '';
     startBracket = '{';
     endBracket = '}';
-    
+
     handleRequestUrl(event) {
         this.requestUrl = event.target.value;
     }
@@ -26,29 +26,30 @@ export default class Streaming extends LightningElement {
                 body: JSON.stringify(body),
                 headers: { 'Content-Type': 'application/json' }
             })
-            .then(response => {
-                    // You parse the data into a useable format using `.json()`
-                    return response.json();
-                },
-                error => { 
-                    console.log('error message---'+error.message);
-                    if (error.message) {
-                        this.doSubscribe();
+                .then(
+                    response => {
+                        // You parse the data into a useable format using `.json()`
+                        return response.json();
+                    },
+                    error => {
+                        console.log('error message---' + error.message);
+                        if (error.message) {
+                            this.doSubscribe();
+                        }
                     }
-                }    
-            ).then(data => {
-                if (data) {
-                    if (data.jsonResponse) {
-                        this.jsonResponse = JSON.stringify(
-                            data.jsonResponse,
-                            null,
-                            4
-                        );
-                        this.doSubscribe();
+                )
+                .then(data => {
+                    if (data) {
+                        if (data.jsonResponse) {
+                            this.jsonResponse = JSON.stringify(
+                                data.jsonResponse,
+                                null,
+                                4
+                            );
+                            this.doSubscribe();
+                        }
                     }
-                }
-            });
-            
+                });
         }
     }
     /*
