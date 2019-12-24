@@ -7,6 +7,7 @@ export default class SalesforceLogin extends LightningElement {
     @track isSoqlQuery = true;
     @track isSoslQuery = false;
     @track isRestExplorer = false;
+    @track isStreaming = false;
     orgType = 'Dev';
     userName = '';
     password = '';
@@ -102,7 +103,10 @@ export default class SalesforceLogin extends LightningElement {
             this.isSoslQuery = true;
         } else if (sfAction === 'restExplorer') {
             this.hideActions();
-            this.restExplorer = true;
+            this.isRestExplorer = true;
+        }else if (sfAction === 'streaming') {
+            this.hideActions();
+            this.isStreaming = true;
         }
     }
     hideActions() {
@@ -110,5 +114,6 @@ export default class SalesforceLogin extends LightningElement {
         this.isSoqlQuery = false;
         this.isSoslQuery = false;
         this.isRestExplorer = false;
+        this.isStreaming = false;
     }
 }

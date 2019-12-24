@@ -1,0 +1,61 @@
+<template>
+    <div class="container">
+        <template if:true={queryMsg}>
+            <P style="background-color:#16a085;padding:10px;font-weight:bold;">
+                {queryMsg}
+            </P>
+            <br />
+        </template>
+        <div>
+            <ul>
+                <li><b>Exmple of Push Topic :</b> /topic/<b>CreateUpdateContact</b></li>
+                <li><b>Exmple of Platform Event :</b> /event/<b>Test_Event__e</b></li>
+                <li><b>Exmple of Standard Object CDC :</b> /data/<b>AccountChangeEvent</b></li>
+                <li><b>Exmple of Custom Object CDC :</b> /event/<b>Employee__ChangeEvent</b></li>
+            </ul>
+        </div>
+        <br/>
+        <p style="color:red;text-align:center">
+            *** We don't validate push topic / platform event name. Make sure it exist in your org.
+            ***
+        </p>
+        <input
+            id="requestUrl"
+            name="requestUrl"
+            type="text"
+            value={requestUrl}
+            placeholder="/topic/CreateUpdateContact"
+            onchange={handleRequestUrl}
+        />
+        <!--
+        <textarea
+            class="slds-input"
+            rows="3"
+            placeholder="FIND {Un*} IN ALL FIELDS RETURNING Account(Id, Name), Lead(Id, Name, Company)"
+            onchange={handleQuery}
+        ></textarea>
+        -->
+        <div class="center">
+            <template if:true={isSubscribeButton}>
+                <button
+                    type="button"
+                    onclick={doSubscribe}
+                    class="slds-button slds-button_brand"
+                >
+                    Subscribe
+                </button>
+            </template>
+            <template if:false={isSubscribeButton}>
+                <h2>Subscribed to <i>{requestUrl}</i> and listening for notification</h2>
+            </template>
+        </div>
+        <br />
+        <template if:true={jsonResponse}>
+            <pre
+                style="background-color:#EEEEEE;padding:10px;font-weight:bold;"
+            >
+                {jsonResponse}
+            </pre>
+        </template>
+    </div>
+</template>

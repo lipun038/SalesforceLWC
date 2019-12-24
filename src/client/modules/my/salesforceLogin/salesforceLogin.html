@@ -98,6 +98,7 @@
                     <option value="soqlQuery">SOQL Query</option>
                     <option value="soslQuery">SOSL Query</option>
                     <option value="restExplorer">REST Explorer</option>
+                    <option value="streaming">Streaming</option>
                 </select>
             </div>
         </div>
@@ -107,8 +108,11 @@
         <template if:true={isSoslQuery}>
             <my-sosl-query></my-sosl-query>
         </template>
-        <template if:true={restExplorer}>
+        <template if:true={isRestExplorer}>
             <my-rest-explorer></my-rest-explorer>
+        </template>
+        <template if:true={isStreaming}>
+            <my-streaming></my-streaming>
         </template>
     </template>
     <br />

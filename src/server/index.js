@@ -92,4 +92,17 @@ module.exports = app => {
             res.json(bodyJson);
         });
     });
+    app.post('/salesforce/api/streaming', (req, res) => {
+        var bodyJson = {};
+        let count = 0;
+        conn.streaming.subscribe(req.body.url, function (message) {
+            bodyJson = {
+                jsonResponse: message
+            };
+            if (count === 0) {
+                count++;
+                res.json(bodyJson);
+            }
+        });
+    });
 };

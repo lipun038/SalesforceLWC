@@ -38,4 +38,9 @@ export default class SoqlQuery extends LightningElement {
                 });
         }
     }
+    /*
+    connectedCallback() { 
+        
+    }*/
+    
 }
