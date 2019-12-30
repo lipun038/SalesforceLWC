@@ -18,8 +18,9 @@ export default class Streaming extends LightningElement {
             this.queryMsg = 'Please enter a valid relative REST API url';
         } else {
             const URL = '/salesforce/api/streaming';
+            let subscribeUrl = this.requestUrl.trim();
             const body = {
-                url: this.requestUrl
+                url: subscribeUrl
             };
             fetch(URL, {
                 method: 'POST',
