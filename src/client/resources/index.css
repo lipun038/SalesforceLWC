@@ -1,0 +1,23 @@
+*,
+body {
+    margin: 0;
+    padding: 0;
+}
+/*
+#headerBanner {
+    height: 50px;
+    background-color: #34495e;
+    color: white;
+}
+*/
+#footerBanner {
+    height: 45px;
+    background-color: #34495e;
+    color: white;
+}
+#main {
+    min-height: 500px;
+}
+header, section, footer, aside, nav, main, article, figure {
+  display: block;
+}
