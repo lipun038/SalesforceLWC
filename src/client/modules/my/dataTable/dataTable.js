@@ -5,7 +5,12 @@ export default class DataTable extends LightningElement {
 
     renderedCallback() {
         var htmlTableStr = '';
-        htmlTableStr += this.buildTable(this.records);
+        if (Array.isArray(this.records)) {
+            htmlTableStr += this.buildTable(this.records);
+        } else { 
+            htmlTableStr += this.buildObjectStr(this.records);    
+        }
+        
         this.template.querySelector('div').innerHTML = htmlTableStr;
     }
     buildTable(records) {
@@ -53,6 +58,13 @@ export default class DataTable extends LightningElement {
                 htmlTableStr += '<tr>';
                 htmlTableStr += '<th>' + key + '</th>';
                 let dataVal = obj[key] ? obj[key] : '';
+                if (dataVal === Object(dataVal)) {
+                    if (Array.isArray(dataVal)) {
+                        dataVal = this.buildTable(dataVal);
+                    } else {
+                        dataVal = this.buildObjectStr(dataVal);
+                    }
+                }
                 htmlTableStr += '<td>' + dataVal + '</td>';
                 htmlTableStr += '</tr>';
             }

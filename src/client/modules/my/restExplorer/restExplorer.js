@@ -3,6 +3,8 @@ import { LightningElement, track } from 'lwc';
 export default class RestExplorer extends LightningElement {
     @track queryMsg = '';
     @track jsonResponse;
+    @track buildTable;
+    records;
     requestType = 'GET';
     requestUrl = '/services/data/v46.0';
     startBracket = '{';
@@ -13,8 +15,13 @@ export default class RestExplorer extends LightningElement {
     handleRequestUrl(event) {
         this.requestUrl = event.target.value;
     }
+    handleBuildTable(event) { 
+        this.buildTable = event.target.checked;
+    }
     doExecuteRequest() {
         this.records = null;
+        this.buildTable = false;
+        this.jsonResponse = null;
         if (!this.requestUrl) {
             this.queryMsg = 'Please enter a valid relative REST API url';
         } else {
@@ -39,6 +46,7 @@ export default class RestExplorer extends LightningElement {
                             null,
                             4
                         );
+                        this.records=data.jsonResponse;
                     } else {
                         this.queryMsg = data.errorMsg;
                         this.jsonResponse = '';

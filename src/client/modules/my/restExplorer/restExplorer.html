@@ -59,11 +59,19 @@
         </div>
         <br />
         <template if:true={jsonResponse}>
-            <pre
-                style="background-color:#EEEEEE;padding:10px;font-weight:bold;"
-            >
-                {jsonResponse}
-            </pre>
+            <div class="center">
+                <input type="checkbox" name="buildTable" onchange={handleBuildTable}><strong>&nbsp;Build Table</strong> <br/><br/>
+            </div>
+            <template if:false={buildTable}>
+                <pre
+                    style="background-color:#EEEEEE;padding:10px;font-weight:bold;"
+                >
+                    {jsonResponse}
+                </pre>
+            </template>
+            <template if:true={buildTable}>
+                <my-data-table records={records}></my-data-table>
+            </template>
         </template>
     </div>
 </template>
