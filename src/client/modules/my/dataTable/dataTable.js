@@ -7,10 +7,10 @@ export default class DataTable extends LightningElement {
         var htmlTableStr = '';
         if (Array.isArray(this.records)) {
             htmlTableStr += this.buildTable(this.records);
-        } else { 
-            htmlTableStr += this.buildObjectStr(this.records);    
+        } else {
+            htmlTableStr += this.buildObjectStr(this.records);
         }
-        
+
         this.template.querySelector('div').innerHTML = htmlTableStr;
     }
     buildTable(records) {

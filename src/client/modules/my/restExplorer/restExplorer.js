@@ -15,7 +15,7 @@ export default class RestExplorer extends LightningElement {
     handleRequestUrl(event) {
         this.requestUrl = event.target.value;
     }
-    handleBuildTable(event) { 
+    handleBuildTable(event) {
         this.buildTable = event.target.checked;
     }
     doExecuteRequest() {
@@ -46,7 +46,7 @@ export default class RestExplorer extends LightningElement {
                             null,
                             4
                         );
-                        this.records=data.jsonResponse;
+                        this.records = data.jsonResponse;
                     } else {
                         this.queryMsg = data.errorMsg;
                         this.jsonResponse = '';

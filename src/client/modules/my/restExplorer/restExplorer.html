@@ -60,7 +60,11 @@
         <br />
         <template if:true={jsonResponse}>
             <div class="center">
-                <input type="checkbox" name="buildTable" onchange={handleBuildTable}><strong>&nbsp;Build Table</strong> <br/><br/>
+                <input
+                    type="checkbox"
+                    name="buildTable"
+                    onchange={handleBuildTable}
+                /><strong>&nbsp;Build Table</strong> <br /><br />
             </div>
             <template if:false={buildTable}>
                 <pre
