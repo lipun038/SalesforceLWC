@@ -9,10 +9,8 @@
         <div>
             <ul>
                 <li><b>Exmple of Standard API :</b> /services/data/v46.0</li>
-                <li><b>Exmple of sObject :</b> /sobjects/Account/describe</li>
                 <li>
-                    <b>Exmple of REST Query :</b>
-                    /services/data/v46.0/query?q=<b
+                    <b>Exmple of REST Query :</b> /services/data/v46.0/query?q=<b
                         >SELECT Name FROM Account LIMIT 5</b
                     >
                 </li>
@@ -22,14 +20,14 @@
                         >/RestDemo/0011500001emgqw</b
                     >
                 </li>
+                <li><b>Exmple of sObject Insert (POST) :</b> /services/data/v46.0/sobjects/Test_Event__e</li>
+                <li><b>Request Body Sample JSON :</b> {startBracket}"Object_Id__c":"Test","Object_Type__c":"Account","Event_Trigger__c":"Insert"{endBracket}</li>
             </ul>
         </div>
         <br />
         <select id="requestType" onchange={handleRequestType}>
             <option value="GET">GET</option>
-            <!--
             <option value="POST">POST</option>
-            -->
         </select>
 
         <input
@@ -40,6 +38,15 @@
             placeholder="/services/data/v46.0"
             onchange={handleRequestUrl}
         />
+        <template if:true={showBody}>
+        <br/>
+            <textarea
+                class="slds-input"
+                rows="3"
+                placeholder="Enter request body"
+                onchange={handleRequestBody}
+            ></textarea>
+        </template>
         <!--
         <textarea
             class="slds-input"

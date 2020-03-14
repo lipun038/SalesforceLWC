@@ -92,6 +92,23 @@ module.exports = app => {
             res.json(bodyJson);
         });
     });
+    app.post('/salesforce/api/restExplorerPost', (req, res) => {
+        var errorMsg = '';
+        var bodyJson = {};
+        var jsonResponse = '';
+        conn.requestPost(req.body.url, req.body.requestBody, function(err, result) {
+            if (err) {
+                errorMsg = err.message;
+            } else {
+                jsonResponse = result;
+            }
+            bodyJson = {
+                jsonResponse: jsonResponse,
+                errorMsg: errorMsg
+            };
+            res.json(bodyJson);
+        });
+    });
     app.post('/salesforce/api/streaming', (req, res) => {
         var bodyJson = {};
         let count = 0;
