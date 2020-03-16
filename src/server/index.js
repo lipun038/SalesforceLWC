@@ -96,7 +96,10 @@ module.exports = app => {
         var errorMsg = '';
         var bodyJson = {};
         var jsonResponse = '';
-        conn.requestPost(req.body.url, req.body.requestBody, function(err, result) {
+        conn.requestPost(req.body.url, req.body.requestBody, function(
+            err,
+            result
+        ) {
             if (err) {
                 errorMsg = err.message;
             } else {

@@ -19,14 +19,14 @@ export default class RestExplorer extends LightningElement {
         this.buildTable = false;
         if (this.requestType === 'POST') {
             this.showBody = true;
-        } else { 
+        } else {
             this.showBody = false;
         }
     }
     handleRequestUrl(event) {
         this.requestUrl = event.target.value;
     }
-    handleRequestBody(event) { 
+    handleRequestBody(event) {
         this.requestBody = event.target.value;
     }
     handleBuildTable(event) {
@@ -36,31 +36,31 @@ export default class RestExplorer extends LightningElement {
         this.records = null;
         this.buildTable = false;
         this.jsonResponse = null;
+        this.queryMsg = null;
         if (!this.requestUrl) {
             this.queryMsg = 'Please enter a valid relative REST API url';
-        } else if (this.requestType === 'POST' && (!this.requestBody)) { 
-            this.queryMsg = 'Please enter body in JSON object format';    
-        }
-        else {
+        } else if (this.requestType === 'POST' && !this.requestBody) {
+            this.queryMsg = 'Please enter body in JSON object format';
+        } else {
             let URL = '/salesforce/api/restExplorerGet';
             let body = {
                 url: this.requestUrl
             };
-            if (this.requestType === 'POST') { 
+            if (this.requestType === 'POST') {
                 URL = '/salesforce/api/restExplorerPost';
                 let requestBody = {};
-                
+
                 try {
                     requestBody = JSON.parse(this.requestBody);
-                } catch(e) {
-                    this.queryMsg = 'Please enter valid JSON object string formart for request body';
+                } catch (e) {
+                    this.queryMsg =
+                        'Please enter valid JSON object string formart for request body';
                     return;
                 }
                 body = {
                     url: this.requestUrl,
-                    requestBody : requestBody
-                };    
-                
+                    requestBody: requestBody
+                };
             }
             fetch(URL, {
                 method: 'POST',
