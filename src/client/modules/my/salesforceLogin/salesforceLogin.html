@@ -103,16 +103,16 @@
             </div>
         </div>
         <template if:true={isSoqlQuery}>
-            <my-soql-query></my-soql-query>
+            <my-soql-query conn={conn}></my-soql-query>
         </template>
         <template if:true={isSoslQuery}>
-            <my-sosl-query></my-sosl-query>
+            <my-sosl-query conn={conn}></my-sosl-query>
         </template>
         <template if:true={isRestExplorer}>
-            <my-rest-explorer></my-rest-explorer>
+            <my-rest-explorer conn={conn}></my-rest-explorer>
         </template>
         <template if:true={isStreaming}>
-            <my-streaming></my-streaming>
+            <my-streaming conn={conn}></my-streaming>
         </template>
     </template>
     <br />

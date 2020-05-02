@@ -1,45 +1,55 @@
 var jsforce = require('jsforce');
-var conn = new jsforce.Connection({
-    // you can change loginUrl to connect to sandbox or prerelease env.
-    // loginUrl : 'https://test.salesforce.com'
-});
+
 module.exports = app => {
     //Required to parse POST body
-    var bodyParser = require('body-parser');
+    let bodyParser = require('body-parser');
     app.use(bodyParser.json()); // support json encoded bodies
     app.use(bodyParser.urlencoded({ extended: true }));
     //End of Required to parse POST body
     // put your express app logic here
     app.post('/salesforce/api/login', (req, res) => {
+        let conn = new jsforce.Connection({});
         if (req.body.orgType === 'Sandbox') {
             conn = new jsforce.Connection({
                 // you can change loginUrl to connect to sandbox or prerelease env.
                 loginUrl: 'https://test.salesforce.com'
             });
+        } else { 
+             conn = new jsforce.Connection({
+                // you can change loginUrl to connect to Developer or Prod env.
+                loginUrl: 'https://login.salesforce.com'
+            });    
         }
+        let bodyJson = {};
         conn.login(
             req.body.userName,
             req.body.password + req.body.securityToken,
-            function(err) {
+            (err) => {
                 if (err) {
-                    res.send(err.message);
+                    bodyJson = { errorMsg : err.message };
+                    res.json(bodyJson);
                 } else {
-                    res.send(
-                        'Login Success : ' +
-                            req.body.userName +
-                            '( v' +
-                            conn.version +
-                            ' )'
-                    );
+                    let tempCon = {
+                        accessToken : conn.accessToken,
+                        instanceUrl : conn.instanceUrl
+                    };
+                    bodyJson = {
+                        userName: req.body.userName,
+                        conn: tempCon
+                    };
+                    res.json(bodyJson);
                 }
             }
         );
     });
     app.post('/salesforce/api/soqlQuery', (req, res) => {
-        var records;
-        var recordsCount = 0;
-        var errorMsg = '';
-        var bodyJson = {};
+        let conn = new jsforce.Connection({});
+        conn.accessToken = req.body.conn.accessToken;
+        conn.instanceUrl = req.body.conn.instanceUrl;
+        let records;
+        let recordsCount = 0;
+        let errorMsg = '';
+        let bodyJson = {};
         conn.query(req.body.q, function(err, result) {
             if (err) {
                 errorMsg = err.message;
@@ -56,10 +66,13 @@ module.exports = app => {
         });
     });
     app.post('/salesforce/api/soslQuery', (req, res) => {
-        var records;
-        var recordsCount = 0;
-        var errorMsg = '';
-        var bodyJson = {};
+        let conn = new jsforce.Connection({});
+        conn.accessToken = req.body.conn.accessToken;
+        conn.instanceUrl = req.body.conn.instanceUrl;
+        let records;
+        let recordsCount = 0;
+        let errorMsg = '';
+        let bodyJson = {};
         conn.search(req.body.q, function(err, result) {
             if (err) {
                 errorMsg = err.message;
@@ -76,9 +89,12 @@ module.exports = app => {
         });
     });
     app.post('/salesforce/api/restExplorerGet', (req, res) => {
-        var errorMsg = '';
-        var bodyJson = {};
-        var jsonResponse = '';
+        let conn = new jsforce.Connection({});
+        conn.accessToken = req.body.conn.accessToken;
+        conn.instanceUrl = req.body.conn.instanceUrl;
+        let errorMsg = '';
+        let bodyJson = {};
+        let jsonResponse = '';
         conn.requestGet(req.body.url, function(err, result) {
             if (err) {
                 errorMsg = err.message;
@@ -93,9 +109,12 @@ module.exports = app => {
         });
     });
     app.post('/salesforce/api/restExplorerPost', (req, res) => {
-        var errorMsg = '';
-        var bodyJson = {};
-        var jsonResponse = '';
+        let conn = new jsforce.Connection({});
+        conn.accessToken = req.body.conn.accessToken;
+        conn.instanceUrl = req.body.conn.instanceUrl;
+        let errorMsg = '';
+        let bodyJson = {};
+        let jsonResponse = '';
         conn.requestPost(req.body.url, req.body.requestBody, function(
             err,
             result
@@ -113,7 +132,10 @@ module.exports = app => {
         });
     });
     app.post('/salesforce/api/streaming', (req, res) => {
-        var bodyJson = {};
+        let conn = new jsforce.Connection({});
+        conn.accessToken = req.body.conn.accessToken;
+        conn.instanceUrl = req.body.conn.instanceUrl;
+        let bodyJson = {};
         let count = 0;
         conn.streaming.subscribe(req.body.url, function(message) {
             bodyJson = {

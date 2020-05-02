@@ -1,6 +1,7 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 
 export default class RestExplorer extends LightningElement {
+    @api conn;
     @track queryMsg = '';
     @track jsonResponse;
     @track buildTable;
@@ -44,6 +45,7 @@ export default class RestExplorer extends LightningElement {
         } else {
             let URL = '/salesforce/api/restExplorerGet';
             let body = {
+                conn : this.conn,
                 url: this.requestUrl
             };
             if (this.requestType === 'POST') {
@@ -58,6 +60,7 @@ export default class RestExplorer extends LightningElement {
                     return;
                 }
                 body = {
+                    conn : this.conn,
                     url: this.requestUrl,
                     requestBody: requestBody
                 };

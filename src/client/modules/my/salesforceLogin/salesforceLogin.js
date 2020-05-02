@@ -1,5 +1,6 @@
 import { LightningElement, track } from 'lwc';
 export default class SalesforceLogin extends LightningElement {
+    @track conn;
     @track loginVisible = true;
     @track actionVisible = false;
     @track loginMsg = 'Please provide your Salesforce org credential';
@@ -12,6 +13,7 @@ export default class SalesforceLogin extends LightningElement {
     userName = '';
     password = '';
     securityToken = '';
+    
 
     doLogin() {
         var validationLoginFlag = this.validateLogin();
@@ -36,17 +38,22 @@ export default class SalesforceLogin extends LightningElement {
                 .then(function(response) {
                     // The response is a Response instance.
                     // You parse the data into a useable format using `.json()`
-                    return response.text();
+                    return response.json();
                 })
                 .then(data => {
-                    this.loginMsg = data;
-                    if (data.includes('Success')) {
+                    if (data.userName) {
+                        this.loginMsg = 'Successfully logged in : ' + data.userName;
+                        this.conn = data.conn;
                         this.actionVisible = true;
                         this.loginVisible = false;
+                    } else { 
+                        this.loginMsg = 'Error : ' + data.errorMsg; 
+                        this.conn = undefined;
                     }
                 });
         }
     }
+    /*
     soqlQuery() {
         const URL = '/salesforce/api/soqlQuery';
         const body = {
@@ -70,7 +77,7 @@ export default class SalesforceLogin extends LightningElement {
                 }
             });
     }
-
+    */
     validateLogin() {
         var noValidation = true;
         if (!this.userName || !this.password) {

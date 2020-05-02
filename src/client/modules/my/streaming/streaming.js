@@ -1,6 +1,7 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 
 export default class Streaming extends LightningElement {
+    @api conn;
     @track queryMsg = '';
     @track jsonResponse;
     @track isSubscribeButton = true;
@@ -20,6 +21,7 @@ export default class Streaming extends LightningElement {
             const URL = '/salesforce/api/streaming';
             let subscribeUrl = this.requestUrl.trim();
             const body = {
+                conn : this.conn,
                 url: subscribeUrl
             };
             fetch(URL, {
