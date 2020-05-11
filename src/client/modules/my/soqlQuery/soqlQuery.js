@@ -1,4 +1,4 @@
-import { LightningElement, track,api } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 
 export default class SoqlQuery extends LightningElement {
     @api conn;
@@ -15,7 +15,7 @@ export default class SoqlQuery extends LightningElement {
         } else {
             const URL = '/salesforce/api/soqlQuery';
             const body = {
-                conn : this.conn,
+                conn: this.conn,
                 q: this.soqlQuery
             };
             fetch(URL, {

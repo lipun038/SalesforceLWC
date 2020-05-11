@@ -21,7 +21,7 @@ export default class Streaming extends LightningElement {
             const URL = '/salesforce/api/streaming';
             let subscribeUrl = this.requestUrl.trim();
             const body = {
-                conn : this.conn,
+                conn: this.conn,
                 url: subscribeUrl
             };
             fetch(URL, {

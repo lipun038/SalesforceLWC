@@ -14,24 +14,24 @@ module.exports = app => {
                 // you can change loginUrl to connect to sandbox or prerelease env.
                 loginUrl: 'https://test.salesforce.com'
             });
-        } else { 
-             conn = new jsforce.Connection({
+        } else {
+            conn = new jsforce.Connection({
                 // you can change loginUrl to connect to Developer or Prod env.
                 loginUrl: 'https://login.salesforce.com'
-            });    
+            });
         }
         let bodyJson = {};
         conn.login(
             req.body.userName,
             req.body.password + req.body.securityToken,
-            (err) => {
+            err => {
                 if (err) {
-                    bodyJson = { errorMsg : err.message };
+                    bodyJson = { errorMsg: err.message };
                     res.json(bodyJson);
                 } else {
                     let tempCon = {
-                        accessToken : conn.accessToken,
-                        instanceUrl : conn.instanceUrl
+                        accessToken: conn.accessToken,
+                        instanceUrl: conn.instanceUrl
                     };
                     bodyJson = {
                         userName: req.body.userName,
@@ -108,6 +108,26 @@ module.exports = app => {
             res.json(bodyJson);
         });
     });
+    app.post('/salesforce/api/restExplorerDelete', (req, res) => {
+        let conn = new jsforce.Connection({});
+        conn.accessToken = req.body.conn.accessToken;
+        conn.instanceUrl = req.body.conn.instanceUrl;
+        let errorMsg = '';
+        let bodyJson = {};
+        let jsonResponse = '';
+        conn.requestDelete(req.body.url, function(err, result) {
+            if (err) {
+                errorMsg = err.message;
+            } else {
+                jsonResponse = result;
+            }
+            bodyJson = {
+                jsonResponse: jsonResponse,
+                errorMsg: errorMsg
+            };
+            res.json(bodyJson);
+        });
+    });
     app.post('/salesforce/api/restExplorerPost', (req, res) => {
         let conn = new jsforce.Connection({});
         conn.accessToken = req.body.conn.accessToken;
@@ -116,6 +136,29 @@ module.exports = app => {
         let bodyJson = {};
         let jsonResponse = '';
         conn.requestPost(req.body.url, req.body.requestBody, function(
+            err,
+            result
+        ) {
+            if (err) {
+                errorMsg = err.message;
+            } else {
+                jsonResponse = result;
+            }
+            bodyJson = {
+                jsonResponse: jsonResponse,
+                errorMsg: errorMsg
+            };
+            res.json(bodyJson);
+        });
+    });
+    app.post('/salesforce/api/restExplorerPatch', (req, res) => {
+        let conn = new jsforce.Connection({});
+        conn.accessToken = req.body.conn.accessToken;
+        conn.instanceUrl = req.body.conn.instanceUrl;
+        let errorMsg = '';
+        let bodyJson = {};
+        let jsonResponse = '';
+        conn.requestPatch(req.body.url, req.body.requestBody, function(
             err,
             result
         ) {

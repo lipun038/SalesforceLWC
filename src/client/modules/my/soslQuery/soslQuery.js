@@ -17,7 +17,7 @@ export default class SoslQuery extends LightningElement {
         } else {
             const URL = '/salesforce/api/soslQuery';
             const body = {
-                conn : this.conn,
+                conn: this.conn,
                 q: this.soslQuery
             };
             fetch(URL, {

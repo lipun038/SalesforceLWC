@@ -18,10 +18,19 @@ export default class RestExplorer extends LightningElement {
         this.queryMsg = '';
         this.jsonResponse = null;
         this.buildTable = false;
-        if (this.requestType === 'POST') {
+        if (this.requestType === 'POST' || this.requestType === 'PATCH') {
             this.showBody = true;
+            this.requestUrl = '/services/data/v46.0/composite/sobjects';
+            if (this.requestType === 'POST') {
+                this.requestBody = '{"allOrNone" : false,"records" : [{"attributes" : {"type" : "Account"},"Name" : "example.com","BillingCity" : "San Francisco"}, {"attributes" : {"type" : "Contact"},"LastName" : "Johnson","FirstName" : "Erica"}] }';
+            } else if (this.requestType === 'PATCH'){ 
+                this.requestBody = '{"allOrNone" : false,"records" : [{"attributes" : {"type" : "Account"},"id" : "001xx000003DGb2AAG","NumberOfEmployees" : 27000},{"attributes" : {"type" : "Contact"},"id" : "003xx000004TmiQAAS","Title" : "Lead Engineer"}] }';    
+            }
         } else {
             this.showBody = false;
+            if (this.requestType === 'DELETE'){ 
+                this.requestUrl = '/services/data/v46.0/composite/sobjects?ids=001xx000003DGb2AAG,003xx000004TmiQAAS&allOrNone=false';    
+            }
         }
     }
     handleRequestUrl(event) {
@@ -40,16 +49,27 @@ export default class RestExplorer extends LightningElement {
         this.queryMsg = null;
         if (!this.requestUrl) {
             this.queryMsg = 'Please enter a valid relative REST API url';
-        } else if (this.requestType === 'POST' && !this.requestBody) {
+        } else if ((this.requestType === 'POST' || this.requestType === 'PATCH') && !this.requestBody) {
             this.queryMsg = 'Please enter body in JSON object format';
         } else {
-            let URL = '/salesforce/api/restExplorerGet';
             let body = {
-                conn : this.conn,
+                conn: this.conn,
                 url: this.requestUrl
             };
-            if (this.requestType === 'POST') {
-                URL = '/salesforce/api/restExplorerPost';
+            let URL;
+            if (this.requestType === 'GET' || this.requestType === 'DELETE') {
+                if (this.requestType === 'GET') {
+                    URL = '/salesforce/api/restExplorerGet';
+                } else if (this.requestType === 'DELETE'){ 
+                    URL = '/salesforce/api/restExplorerDelete';    
+                }
+            } else if (this.requestType === 'POST' || this.requestType === 'PATCH') {
+                 if (this.requestType === 'POST') {
+                    URL = '/salesforce/api/restExplorerPost';
+                } else if (this.requestType === 'PATCH'){ 
+                   URL = '/salesforce/api/restExplorerPatch';    
+                }
+                
                 let requestBody = {};
 
                 try {
@@ -59,11 +79,7 @@ export default class RestExplorer extends LightningElement {
                         'Please enter valid JSON object string formart for request body';
                     return;
                 }
-                body = {
-                    conn : this.conn,
-                    url: this.requestUrl,
-                    requestBody: requestBody
-                };
+                body.requestBody = requestBody;  
             }
             fetch(URL, {
                 method: 'POST',

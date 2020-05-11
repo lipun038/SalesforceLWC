@@ -13,7 +13,6 @@ export default class SalesforceLogin extends LightningElement {
     userName = '';
     password = '';
     securityToken = '';
-    
 
     doLogin() {
         var validationLoginFlag = this.validateLogin();
@@ -42,12 +41,13 @@ export default class SalesforceLogin extends LightningElement {
                 })
                 .then(data => {
                     if (data.userName) {
-                        this.loginMsg = 'Successfully logged in : ' + data.userName;
+                        this.loginMsg =
+                            'Successfully logged in : ' + data.userName;
                         this.conn = data.conn;
                         this.actionVisible = true;
                         this.loginVisible = false;
-                    } else { 
-                        this.loginMsg = 'Error : ' + data.errorMsg; 
+                    } else {
+                        this.loginMsg = 'Error : ' + data.errorMsg;
                         this.conn = undefined;
                     }
                 });
