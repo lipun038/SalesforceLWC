@@ -6,6 +6,12 @@ module.exports = app => {
     app.use(bodyParser.json()); // support json encoded bodies
     app.use(bodyParser.urlencoded({ extended: true }));
     //End of Required to parse POST body
+    //Redirect http to HTTPs
+    app.use(function(req, res){
+        if(!req.secure){
+            res.redirect("https://" + req.headers.host + res.url);
+        }
+    });
     // put your express app logic here
     app.post('/salesforce/api/login', (req, res) => {
         let conn = new jsforce.Connection({});
