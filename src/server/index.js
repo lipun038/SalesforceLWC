@@ -1,5 +1,6 @@
 var jsforce = require('jsforce');
 var geoip = require('geoip-lite');
+const ipLocation = require('iplocation');
 
 module.exports = app => {
     //Required to parse POST body
@@ -196,14 +197,19 @@ module.exports = app => {
         let myIp =
             req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         let geo;
-        try{
-            geo = geoip.lookup(myIp);
-        }catch(e){
-            geo = {};
-        }      
+        try {
+            geo = ipLocation(myIp); //1000 request per day limit.
+        } catch (e) {
+            try {
+                geo = geoip.lookup(myIp);
+            } catch (e1) {
+                geo = {};
+            }
+        }
+
         let bodyJson = {
             clientIp: myIp,
-            location : geo
+            location: geo
         };
         res.json(bodyJson);
     });
