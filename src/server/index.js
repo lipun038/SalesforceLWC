@@ -1,4 +1,5 @@
 var jsforce = require('jsforce');
+var geoip = require('geoip-lite');
 
 module.exports = app => {
     //Required to parse POST body
@@ -194,8 +195,15 @@ module.exports = app => {
     app.get('/myip', (req, res) => {
         let myIp =
             req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        let geo;
+        try{
+            geo = geoip.lookup(myIp);
+        }catch(e){
+            geo = {};
+        }      
         let bodyJson = {
-            clientIp: myIp
+            clientIp: myIp,
+            location : geo
         };
         res.json(bodyJson);
     });
