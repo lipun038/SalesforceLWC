@@ -7,9 +7,12 @@
             src="https://www.googletagmanager.com/gtag/js?id=UA-153792068-1"
         ></script>
         <script>
-            if (location.protocol !== "https:" && location.host.includes("localhost")===false) {
-                location.protocol = "https:";
-              }
+            if (
+                location.protocol !== 'https:' &&
+                location.host.includes('localhost') === false
+            ) {
+                location.protocol = 'https:';
+            }
             window.dataLayer = window.dataLayer || [];
             function gtag() {
                 dataLayer.push(arguments);

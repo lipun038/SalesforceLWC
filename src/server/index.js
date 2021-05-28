@@ -6,7 +6,7 @@ module.exports = app => {
     app.use(bodyParser.json()); // support json encoded bodies
     app.use(bodyParser.urlencoded({ extended: true }));
     //End of Required to parse POST body
-    
+
     // put your express app logic here
     app.post('/salesforce/api/login', (req, res) => {
         let conn = new jsforce.Connection({});
@@ -190,5 +190,12 @@ module.exports = app => {
                 res.json(bodyJson);
             }
         });
+    });
+    app.post('/myip', (req, res) => {
+        let myIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress ;
+        let bodyJson = {
+            clientIp: myIp
+        };    
+        res.json(bodyJson);
     });
 };
