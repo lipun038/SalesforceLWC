@@ -1,6 +1,5 @@
 var jsforce = require('jsforce');
-//var geoip = require('geoip-lite');
-const ipLocation = require('iplocation');
+var geoip = require('geoip-lite');
 
 module.exports = app => {
     //Required to parse POST body
@@ -197,20 +196,9 @@ module.exports = app => {
         let myIp =
             req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         let geo;
-        (async () => {
-            geo = await ipLocation(myIp);
-
-            let bodyJson = {
-                clientIp: myIp,
-                location: geo
-            };
-            res.json(bodyJson);
-            //=> { latitude: -33.8591, longitude: 151.2002, region: { name: "New South Wales" ... } ... }
-        })();
-        /*
         try {
-            geo = geoip.lookup(myIp); //Alternative option for iplocation not work.
-        } catch (e1) {
+            geo = geoip.lookup(myIp); 
+        } catch (e) {
             geo = {};
         }
         let bodyJson = {
@@ -218,6 +206,5 @@ module.exports = app => {
             location: geo
         };
         res.json(bodyJson);
-        */
     });
 };
