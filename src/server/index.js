@@ -1,5 +1,5 @@
 var jsforce = require('jsforce');
-var geoip = require('geoip-lite');
+//var geoip = require('geoip-lite');
 const ipLocation = require('iplocation');
 
 module.exports = app => {
@@ -197,20 +197,27 @@ module.exports = app => {
         let myIp =
             req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         let geo;
-        try {
-            geo = ipLocation(myIp); //1000 request per day limit.
-        } catch (e) {
-            try {
-                geo = geoip.lookup(myIp);
-            } catch (e1) {
-                geo = {};
-            }
-        }
+        (async () => {
+            geo = await ipLocation(myIp);
 
+            let bodyJson = {
+                clientIp: myIp,
+                location: geo
+            };
+            res.json(bodyJson);
+            //=> { latitude: -33.8591, longitude: 151.2002, region: { name: "New South Wales" ... } ... }
+        })();
+        /*
+        try {
+            geo = geoip.lookup(myIp); //Alternative option for iplocation not work.
+        } catch (e1) {
+            geo = {};
+        }
         let bodyJson = {
             clientIp: myIp,
             location: geo
         };
         res.json(bodyJson);
+        */
     });
 };
