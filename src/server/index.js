@@ -191,11 +191,12 @@ module.exports = app => {
             }
         });
     });
-    app.post('/myip', (req, res) => {
-        let myIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress ;
+    app.get('/myip', (req, res) => {
+        let myIp =
+            req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         let bodyJson = {
             clientIp: myIp
-        };    
+        };
         res.json(bodyJson);
     });
 };
