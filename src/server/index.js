@@ -1,5 +1,6 @@
 var jsforce = require('jsforce');
 var geoip = require('geoip-lite');
+var Sentiment = require('sentiment');
 
 module.exports = app => {
     //Required to parse POST body
@@ -192,12 +193,35 @@ module.exports = app => {
             }
         });
     });
+    app.post('/sentiment', (req, res) => {
+        let message = req.body.message;
+        if (!message) {
+            res.json({ error: 'message is empty' });
+        } else {
+            let sentiment = new Sentiment();
+            let result = sentiment.analyze(message);
+            let intensifier = 'Neutral';
+            if (result > 0 && result < 5) {
+                intensifier = 'Positive';
+            } else if (result >= 5) {
+                intensifier = 'Extremely Positive';
+            } else if (result < 0 && result > -5) {
+                intensifier = 'Negative';
+            } else if (result <= -5) {
+                intensifier = 'Extremely Negative';
+            }
+            let bodyJson = {
+                intensifier: intensifier
+            };
+            res.json(bodyJson);
+        }
+    });
     app.get('/myip', (req, res) => {
         let myIp =
             req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         let geo;
         try {
-            geo = geoip.lookup(myIp); 
+            geo = geoip.lookup(myIp);
         } catch (e) {
             geo = {};
         }
