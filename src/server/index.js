@@ -199,7 +199,8 @@ module.exports = app => {
             res.json({ error: 'message is empty' });
         } else {
             let sentiment = new Sentiment();
-            let result = sentiment.analyze(message);
+            let resultObj = sentiment.analyze(message);
+            let result = resultObj.score;
             let intensifier = 'Neutral';
             if (result > 0 && result < 5) {
                 intensifier = 'Positive';
