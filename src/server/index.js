@@ -1,6 +1,7 @@
 var jsforce = require('jsforce');
 var geoip = require('geoip-lite');
 var Sentiment = require('sentiment');
+var numberToText = require('number2text');
 
 module.exports = app => {
     //Required to parse POST body
@@ -216,6 +217,25 @@ module.exports = app => {
             };
             res.json(bodyJson);
         }
+    });
+    app.post('/convertToWords', (req, res) => {
+        let numberValue = req.body.numberValue;
+        let bodyJson;
+        if (!numberValue) {
+            res.json({ error: 'numberValue is empty' });
+        } else if (isNaN(numberValue)) {
+            res.json({ error: 'numberValue should be a number' });
+        } else {
+            try {
+                let textValue = numberToText(numberValue, 'English');
+                bodyJson = {
+                    textValue: textValue
+                };
+            } catch (e) {
+                bodyJson = {};
+            }
+        }
+        res.json(bodyJson);
     });
     app.get('/myip', (req, res) => {
         let myIp =
