@@ -228,10 +228,13 @@ module.exports = app => {
         } else {
             try {
                 let textValue = '';
-                if(numberValue >= 1000000){
+                if(typeof numberValue === 'string' ){
+                    numberValue = Number(numberValue) ;    
+                }
+                if (numberValue >= 1000000) {
                     textValue = numberToText(numberValue, 'English');
-                }else{
-                    textValue = numberToText(numberValue);    
+                } else {
+                    textValue = numberToText(numberValue);
                 }
                 bodyJson = {
                     textValue: textValue
