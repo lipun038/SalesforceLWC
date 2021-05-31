@@ -227,7 +227,12 @@ module.exports = app => {
             res.json({ error: 'numberValue should be a number' });
         } else {
             try {
-                let textValue = numberToText(numberValue, 'English');
+                let textValue = '';
+                if(numberValue >= 1000000){
+                    textValue = numberToText(numberValue, 'English');
+                }else{
+                    textValue = numberToText(numberValue);    
+                }
                 bodyJson = {
                     textValue: textValue
                 };
