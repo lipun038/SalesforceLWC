@@ -228,8 +228,8 @@ module.exports = app => {
         } else {
             try {
                 let textValue = '';
-                if(typeof numberValue === 'string' ){
-                    numberValue = Number(numberValue) ;    
+                if (typeof numberValue === 'string') {
+                    numberValue = Number(numberValue);
                 }
                 if (numberValue >= 1000000) {
                     textValue = numberToText(numberValue, 'English');

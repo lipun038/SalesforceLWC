@@ -9,10 +9,24 @@ export default class SalesforceLogin extends LightningElement {
     @track isSoslQuery = false;
     @track isRestExplorer = false;
     @track isStreaming = false;
+    @track isShowMore = false;
+    
     orgType = 'Dev';
     userName = '';
     password = '';
     securityToken = '';
+
+    showMoreLess = 'Show More >>';
+
+    toggleAccessTokenUrl(){
+        if(this.isShowMore){
+            this.showMoreLess = 'Show More >>'; 
+            this.isShowMore = false;   
+        }else{
+            this.showMoreLess = '<< Show Less'; 
+            this.isShowMore = true;    
+        }
+    }
 
     doLogin() {
         var validationLoginFlag = this.validateLogin();
@@ -53,31 +67,7 @@ export default class SalesforceLogin extends LightningElement {
                 });
         }
     }
-    /*
-    soqlQuery() {
-        const URL = '/salesforce/api/soqlQuery';
-        const body = {
-            q: 'SELECT Id,Name FROM ACCOUNT LIMIT 1'
-        };
-        fetch(URL, {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: { 'Content-Type': 'application/json' }
-        })
-            .then(function(response) {
-                // The response is a Response instance.
-                // You parse the data into a useable format using `.json()`
-                return response.json();
-            })
-            .then(data => {
-                if (!data.errorMsg) {
-                    this.loginMsg = 'Number of records : ' + data.recordsCount;
-                } else {
-                    this.loginMsg = data.errorMsg;
-                }
-            });
-    }
-    */
+    
     validateLogin() {
         var noValidation = true;
         if (!this.userName || !this.password) {

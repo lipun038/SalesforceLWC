@@ -1,9 +1,26 @@
 <template>
     <P
         class="center"
-        style="background-color:#EEEEEE;padding:10px;font-weight:bold;"
+        style="background-color:#EEEEEE;padding:10px;"
     >
-        {loginMsg}
+        <b>{loginMsg}</b>
+        <template if:true={actionVisible}>
+            &nbsp;&nbsp;<a href="#"
+                type="button"
+                onclick={toggleAccessTokenUrl}
+                style="background-color: #3498db;color: white;padding: 3px 10px 3px 10px;text-decoration: none;"
+            >
+                {showMoreLess}
+            </a>
+            <template if:true={isShowMore}>
+                <p>
+                   <br/> <b>Instance URL : </b>{conn.instanceUrl}
+                </p>
+                <p>
+                    <br/><b>Access Token : </b>{conn.accessToken}
+                </p>
+            </template>
+        </template>
     </P>
     <template if:true={loginVisible}>
         <div class="container">
