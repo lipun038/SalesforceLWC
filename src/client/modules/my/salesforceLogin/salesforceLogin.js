@@ -10,7 +10,7 @@ export default class SalesforceLogin extends LightningElement {
     @track isRestExplorer = false;
     @track isStreaming = false;
     @track isShowMore = false;
-    
+
     orgType = 'Dev';
     userName = '';
     password = '';
@@ -18,13 +18,13 @@ export default class SalesforceLogin extends LightningElement {
 
     showMoreLess = 'Show More >>';
 
-    toggleAccessTokenUrl(){
-        if(this.isShowMore){
-            this.showMoreLess = 'Show More >>'; 
-            this.isShowMore = false;   
-        }else{
-            this.showMoreLess = '<< Show Less'; 
-            this.isShowMore = true;    
+    toggleAccessTokenUrl() {
+        if (this.isShowMore) {
+            this.showMoreLess = 'Show More >>';
+            this.isShowMore = false;
+        } else {
+            this.showMoreLess = '<< Show Less';
+            this.isShowMore = true;
         }
     }
 
@@ -67,7 +67,7 @@ export default class SalesforceLogin extends LightningElement {
                 });
         }
     }
-    
+
     validateLogin() {
         var noValidation = true;
         if (!this.userName || !this.password) {
