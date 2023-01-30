@@ -16,6 +16,14 @@
         >
             JSON Formater
         </button>
+        <button
+            class="tablinks"
+            onclick={openTab}
+            id="restClientTab"
+            value="RestClient"
+        >
+            REST Client
+        </button>
     </div>
 
     <div
@@ -30,6 +38,9 @@
         <my-json-formater></my-json-formater>
     </div>
 
+    <div id="RestClient" data-id="RestClient" class="tabcontent">
+        <my-rest-explorer-generic></my-rest-explorer-generic>
+    </div>
     <!--
     <div>
         <my-salesforce-login></my-salesforce-login>

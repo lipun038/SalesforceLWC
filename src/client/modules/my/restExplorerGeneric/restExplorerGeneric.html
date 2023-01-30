@@ -1,0 +1,87 @@
+<template>
+    <div class="container">
+        <template if:true={queryMsg}>
+            <P style="background-color:#16a085;padding:10px;font-weight:bold;">
+                {queryMsg}
+            </P>
+            <br />
+        </template>
+        
+        <br />
+        <select id="requestType" onchange={handleRequestType}>
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PATCH">PATCH</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+        </select>
+        <h5>Endpoint URL</h5>
+        <input
+            id="requestUrl"
+            name="requestUrl"
+            type="text"
+            value={requestUrl}
+            placeholder="https://salesforcelwc.herokuapp.com/myip"
+            onchange={handleRequestUrl}
+        />
+        <br />
+        <h5>Request Headers</h5>
+        <textarea
+                class="slds-input"
+                rows="3"
+                placeholder="Enter request headers"
+                onchange={handleRequestHeaders}
+            >
+{requestHeaders}</textarea
+            >
+        <template if:true={showBody}>
+            <br />
+            <h5>Request Body</h5>
+            <textarea
+                class="slds-input"
+                rows="3"
+                placeholder="Enter request body"
+                onchange={handleRequestBody}
+            >
+{requestBody}</textarea
+            >
+        </template>
+        <!--
+        <textarea
+            class="slds-input"
+            rows="3"
+            placeholder="FIND {Un*} IN ALL FIELDS RETURNING Account(Id, Name), Lead(Id, Name, Company)"
+            onchange={handleQuery}
+        ></textarea>
+        -->
+        <div class="center">
+            <button
+                type="button"
+                onclick={doExecuteRequest}
+                class="slds-button slds-button_brand"
+            >
+                Execute
+            </button>
+        </div>
+        <br />
+        <template if:true={jsonResponse}>
+            <div class="center">
+                <input
+                    type="checkbox"
+                    name="buildTable"
+                    onchange={handleBuildTable}
+                /><strong>&nbsp;Build Table</strong> <br /><br />
+            </div>
+            <template if:false={buildTable}>
+                <pre
+                    style="background-color:#EEEEEE;padding:10px;font-weight:bold;"
+                >
+                    {jsonResponse}
+                </pre>
+            </template>
+            <template if:true={buildTable}>
+                <my-data-table records={records}></my-data-table>
+            </template>
+        </template>
+    </div>
+</template>
