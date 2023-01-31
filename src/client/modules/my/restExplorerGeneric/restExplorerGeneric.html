@@ -6,7 +6,7 @@
             </P>
             <br />
         </template>
-        
+
         <br />
         <select id="requestType" onchange={handleRequestType}>
             <option value="GET">GET</option>
@@ -27,13 +27,13 @@
         <br />
         <h5>Request Headers</h5>
         <textarea
-                class="slds-input"
-                rows="3"
-                placeholder="Enter request headers"
-                onchange={handleRequestHeaders}
-            >
+            class="slds-input"
+            rows="3"
+            placeholder="Enter request headers"
+            onchange={handleRequestHeaders}
+        >
 {requestHeaders}</textarea
-            >
+        >
         <template if:true={showBody}>
             <br />
             <h5>Request Body</h5>

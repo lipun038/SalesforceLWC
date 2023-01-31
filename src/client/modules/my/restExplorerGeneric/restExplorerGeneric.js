@@ -19,7 +19,11 @@ export default class RestExplorer extends LightningElement {
         this.queryMsg = '';
         this.jsonResponse = null;
         this.buildTable = false;
-        if (this.requestType === 'POST' || this.requestType === 'PATCH' || this.requestType === 'PUT') {
+        if (
+            this.requestType === 'POST' ||
+            this.requestType === 'PATCH' ||
+            this.requestType === 'PUT'
+        ) {
             this.showBody = true;
         } else {
             this.showBody = false;
@@ -45,45 +49,61 @@ export default class RestExplorer extends LightningElement {
         if (!this.requestUrl) {
             this.queryMsg = 'Please enter a valid Endpoint url';
         } else if (
-            (this.requestType === 'POST' || this.requestType === 'PATCH' || this.requestType === 'PUT') &&
+            (this.requestType === 'POST' ||
+                this.requestType === 'PATCH' ||
+                this.requestType === 'PUT') &&
             !this.requestBody
         ) {
             this.queryMsg = 'Please enter body in JSON object format';
         } else {
             let extraParam = {};
             extraParam.method = this.requestType;
-            if(this.requestHeaders){
-                let headersObj = {};
-                let requestHeadersStr = this.requestHeaders.replaceAll('\n',';');
-                for(let hdr of requestHeadersStr.split(';')){
-                    let tmp = hdr.split(':');
-                    headersObj[tmp[0].trim()] = headersObj[tmp[1].trim()];
+            if (this.requestHeaders) {
+                //let headersObj = {};
+                let requestHeadersStr = this.requestHeaders.replaceAll(
+                    '\n',
+                    ','
+                );
+                try{
+                    extraParam.headers = JSON.parse('{'+requestHeadersStr+'}');
+                }catch(err){
+                    console.log(err);
                 }
-                extraParam.headers = headersObj;    
+                
             }
-            if (this.requestType === 'POST' || this.requestType === 'PATCH' || this.requestType === 'PUT') {
+            if (
+                this.requestType === 'POST' ||
+                this.requestType === 'PATCH' ||
+                this.requestType === 'PUT'
+            ) {
                 extraParam.body = this.requestBody;
             }
-            fetch(this.requestUrl,extraParam)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(response.statusText)
-                    }
+            let body = {};
+            body.requestUrl = this.requestUrl;
+            body.extraParam = extraParam;
+            fetch('/restClient', {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(function(response) {
+                    // The response is a Response instance.
+                    // You parse the data into a useable format using `.json()`
                     return response.json();
-            })
-            .then(data => {
-                this.jsonResponse = JSON.stringify(
-                    data,
-                    null,
-                    4
-                );
-                this.records = data;
-            })
-            .catch(err=>{
-                this.queryMsg = err;
-            })
-            
-            
+                })
+                .then(response => {
+                    if (!response.err) {
+                        this.jsonResponse = JSON.stringify(
+                            response.data,
+                            null,
+                            4
+                        );
+                        this.records = response.data;
+                    } else {
+                        this.queryMsg = response.err;
+                        this.jsonResponse = '';
+                    }
+                });
         }
     }
 }

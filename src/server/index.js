@@ -2,6 +2,7 @@ var jsforce = require('jsforce');
 var geoip = require('geoip-lite');
 var Sentiment = require('sentiment');
 var numberToText = require('number2text');
+var fetch = require('node-fetch');
 
 module.exports = app => {
     //Required to parse POST body
@@ -244,6 +245,37 @@ module.exports = app => {
             }
         }
         res.json(bodyJson);
+    });
+    app.post('/restClient', (req, res) => {
+        let requestUrl = req.body.requestUrl;
+        let extraParam = req.body.extraParam;
+        /*
+        extraParam.headers = {
+            "Content-type": "application/json; charset=UTF-8"
+        };
+        
+        extraParam.body = JSON.stringify({
+            "numberValue" : 100
+        });*/
+        console.log('---URL : '+requestUrl);
+        console.log('---extraParam : '+JSON.stringify(extraParam));
+        let bodyJson = {};
+        fetch(requestUrl, extraParam)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            bodyJson.data = data;
+            res.json(bodyJson);
+        })
+        .catch(err => {
+            bodyJson.err = err;
+            res.json(bodyJson);
+        });
+        
     });
     app.get('/myip', (req, res) => {
         let myIp =
