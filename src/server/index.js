@@ -257,13 +257,13 @@ module.exports = app => {
         extraParam.body = JSON.stringify({
             "numberValue" : 100
         });*/
-        console.log('---URL : ' + requestUrl);
-        console.log('---extraParam : ' + JSON.stringify(extraParam));
+        //console.log('---URL : ' + requestUrl);
+        //console.log('---extraParam : ' + JSON.stringify(extraParam));
         let bodyJson = {};
         fetch(requestUrl, extraParam)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(response.statusText);
+                    throw new Error(response.status+' : '+response.statusText );
                 }
                 return response.json();
             })
@@ -272,7 +272,11 @@ module.exports = app => {
                 res.json(bodyJson);
             })
             .catch(err => {
-                bodyJson.err = err;
+                try{
+                    bodyJson.err = err.message;    
+                }catch(er){
+                    bodyJson.err = err;
+                }
                 res.json(bodyJson);
             });
     });

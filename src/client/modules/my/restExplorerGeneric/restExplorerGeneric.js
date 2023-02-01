@@ -102,7 +102,7 @@ export default class RestExplorer extends LightningElement {
                         this.records = response.data;
                     } else {
                         console.log(response.err);
-                        this.queryMsg = JSON.stringify(response.err);
+                        this.queryMsg = response.err;
                         this.jsonResponse = '';
                     }
                 });
