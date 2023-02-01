@@ -257,25 +257,24 @@ module.exports = app => {
         extraParam.body = JSON.stringify({
             "numberValue" : 100
         });*/
-        console.log('---URL : '+requestUrl);
-        console.log('---extraParam : '+JSON.stringify(extraParam));
+        console.log('---URL : ' + requestUrl);
+        console.log('---extraParam : ' + JSON.stringify(extraParam));
         let bodyJson = {};
         fetch(requestUrl, extraParam)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            bodyJson.data = data;
-            res.json(bodyJson);
-        })
-        .catch(err => {
-            bodyJson.err = err;
-            res.json(bodyJson);
-        });
-        
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                bodyJson.data = data;
+                res.json(bodyJson);
+            })
+            .catch(err => {
+                bodyJson.err = err;
+                res.json(bodyJson);
+            });
     });
     app.get('/myip', (req, res) => {
         let myIp =

@@ -64,12 +64,13 @@ export default class RestExplorer extends LightningElement {
                     '\n',
                     ','
                 );
-                try{
-                    extraParam.headers = JSON.parse('{'+requestHeadersStr+'}');
-                }catch(err){
+                try {
+                    extraParam.headers = JSON.parse(
+                        '{' + requestHeadersStr + '}'
+                    );
+                } catch (err) {
                     console.log(err);
                 }
-                
             }
             if (
                 this.requestType === 'POST' ||
@@ -100,7 +101,8 @@ export default class RestExplorer extends LightningElement {
                         );
                         this.records = response.data;
                     } else {
-                        this.queryMsg = response.err;
+                        console.log(response.err);
+                        this.queryMsg = JSON.stringify(response.err);
                         this.jsonResponse = '';
                     }
                 });
