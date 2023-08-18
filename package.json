@@ -2,7 +2,6 @@
     "name": "SalesforceHook",
     "version": "0.0.0",
     "bugs": "https://github.com//SalesforceHook/issues",
-    "main" : "./scripts/express-dev.js",
     "dependencies": {
         "geoip-lite": "^1.4.2",
         "jsforce": "^1.9.3",
@@ -66,6 +65,7 @@
         "test:unit:watch": "lwc-services test:unit --watch",
         "watch": "run-p watch:client watch:server",
         "watch:client": "lwc-services watch",
-        "watch:server": "nodemon"
+        "watch:server": "nodemon",
+        "start": "node ./scripts/express-dev.js"
     }
 }
