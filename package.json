@@ -2,6 +2,7 @@
     "name": "SalesforceHook",
     "version": "0.0.0",
     "bugs": "https://github.com//SalesforceHook/issues",
+    "main" : "./scripts/express-dev.js",
     "dependencies": {
         "geoip-lite": "^1.4.2",
         "jsforce": "^1.9.3",
